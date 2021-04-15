@@ -20,11 +20,12 @@ const Promotions = props => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState(data);
+  const [search, setSearch] = useState(data);
 
-  const getItems = useCallback(async () => {
+  const getItems = useCallback(async txt => {
     try {
       setLoading(true);
-      const resp = await api.get('promotion-user');
+      const resp = await api.get(`promotion?data=${txt ? txt : ''}`);
       setData(resp.data);
       setLoading(false);
     } catch (err) {
@@ -57,9 +58,6 @@ const Promotions = props => {
           refreshing={refreshing}>
           <ScrollViewStyled contentContainerStyle={{flexGrow: 1}}>
             <Content>
-              <Button icon="check" onPress={() => navigate('NewPromotion')}>
-                Adicionar nova
-              </Button>
               <FlatListStyled
                 data={data && data.length ? data : []}
                 renderItem={({item}) => <Item item={item} />}

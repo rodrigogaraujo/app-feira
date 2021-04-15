@@ -8,6 +8,7 @@ import {useAuth} from '../../hooks/Auth';
 import {colors} from '../../global';
 
 import Provider from './Components/Provider';
+import Marketer from './Components/Marketer';
 
 import {
   Container,
@@ -53,6 +54,7 @@ const Home = props => {
               </>
             )}
             {user && user.level === 'provider' ? <Provider /> : null}
+            {user && user.level === 'marketer' ? <Marketer /> : null}
           </Content>
         </ScrollViewStyled>
       </ViewScroll>

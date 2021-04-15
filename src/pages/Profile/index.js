@@ -49,6 +49,21 @@ const Profile = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const uploadImage = useCallback(async file => {
+    const upImage = await api
+      .post('upload', file, {
+        // onUploadProgress: progressEvent => {}
+      })
+      .then(response => {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch(error => {
+        return error;
+      });
+    return upImage;
+  }, []);
+
   const handleImage = useCallback(
     ({response, typeAction}) => {
       if (response.didCancel) {
@@ -91,7 +106,11 @@ const Profile = () => {
               setImage({...resp, type});
               const fd = new FormData();
               fd.append('image', {...resp, type});
-              const data = await api.put(`/users/${user.id}`, fd);
+              const avatar = await uploadImage(fd);
+              const data = await api.put(`/users/${user.id}`, {
+                ...user,
+                avatar,
+              });
               setUser(data.data);
               setLoading(false);
             });
@@ -103,7 +122,7 @@ const Profile = () => {
           });
       }
     },
-    [user, setUser],
+    [user, setUser, uploadImage],
   );
 
   const getImage = useCallback(
