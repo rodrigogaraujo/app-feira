@@ -6,6 +6,11 @@ const {width} = Dimensions.get('window');
 
 import {colors, fonts} from '../../global';
 
+export const FlatListStyled = styled.FlatList`
+  flex-basis: 0;
+  flex: 1;
+`;
+
 export const Container = styled.View`
   flex: 1;
   background-color: ${colors.secondary};

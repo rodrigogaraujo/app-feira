@@ -6,6 +6,8 @@ const {width} = Dimensions.get('window');
 
 import {colors, fonts} from '../../global';
 
+const ImageStyle = styled.Image``;
+
 export const Container = styled.View`
   flex: 1;
   background-color: ${colors.secondary};
@@ -113,4 +115,63 @@ export const TextButton = styled.Text`
   font-size: ${fonts.regular};
   margin-top: 12px;
   font-family: ${fonts.fontFamilyRegular};
+`;
+
+export const HeaderProfile = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const HeaderImage = styled.TouchableOpacity`
+  width: 100%;
+  height: 250px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ImageUser = styled(ImageStyle).attrs({})`
+  width: 100%;
+  height: 250px;
+  border-radius: 12px;
+`;
+
+export const ModalSelection = styled.Modal``;
+
+export const ModalContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+export const ModalCard = styled.View`
+  background-color: ${colors.white};
+  padding: 30px;
+  border-radius: 12px;
+`;
+
+export const ModalTitle = styled.Text`
+  font-size: ${fonts.small};
+  color: ${colors.black};
+  font-family: ${fonts.fontFamilyBold};
+  width: 100%;
+  text-align: center;
+`;
+
+export const ModalButton = styled.TouchableOpacity`
+  align-self: flex-end;
+  margin-top: 24px;
+`;
+
+export const ModalOption = styled.TouchableOpacity`
+  margin-top: 24px;
+`;
+
+export const ModalButtonText = styled.Text`
+  font-size: ${fonts.regular};
+  color: ${colors.primary_correct};
+  font-family: ${fonts.fontFamilyRegular};
+  width: 100%;
+  text-align: center;
 `;

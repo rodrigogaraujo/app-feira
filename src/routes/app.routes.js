@@ -11,6 +11,7 @@ import SignIn from '../pages/SignIn';
 import Recover from '../pages/Recover';
 import SignUp from '../pages/SignUp';
 import Promotions from '../pages/Promotions';
+import NewPromotion from '../pages/NewPromotion';
 
 const App = createStackNavigator();
 let state = null;
@@ -33,6 +34,7 @@ const StackRoutes = props => {
       <App.Screen name="Recover" component={Recover} />
       <App.Screen name="SignUp" component={SignUp} />
       <App.Screen name="Promotions" component={Promotions} />
+      <App.Screen name="NewPromotion" component={NewPromotion} />
     </App.Navigator>
   );
 };
