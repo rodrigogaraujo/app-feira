@@ -26,7 +26,7 @@ const Promotions = props => {
     try {
       setLoading(true);
       const resp = await api.get(`promotion?data=${txt ? txt : ''}`);
-      setData(resp.data);
+      setData(resp.data.filter(promo => promo.status));
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -49,7 +49,7 @@ const Promotions = props => {
       <Header
         action={() => goBack()}
         icon="arrow-left"
-        title="Suas promoções"
+        title="Promoções para você"
       />
       <ViewScroll>
         <RefreshControl

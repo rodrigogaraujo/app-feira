@@ -188,7 +188,8 @@ const Item = props => {
                 initialValues={{
                   title: item && item.title ? item.title : '',
                   description: item && item.description ? item.description : '',
-                  value: item && item.value ? item.value : '',
+                  value: item && item.value ? item.value : 0,
+                  stock: item && item.stock ? item.stock : 0,
                 }}
                 validationSchema={schema}
                 onSubmit={handleSubmitData}>
@@ -252,6 +253,17 @@ const Item = props => {
                       value={values.value}
                       onChangeValue={val => setFieldValue('value', val)}
                       unit="R$"
+                      delimiter=","
+                      separator="."
+                      precision={2}
+                      // onChangeText={(formattedValue) => {
+                      //   console.log(formattedValue); // $2,310.46
+                      // }}
+                    />
+                    <InputCurrency
+                      value={values.value}
+                      onChangeValue={val => setFieldValue('value', val)}
+                      unit="Quantidade"
                       delimiter=","
                       separator="."
                       precision={2}
