@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
@@ -34,7 +34,6 @@ import {
 
 const Item = props => {
   const {goBack} = props.navigation;
-  const {item} = props.route.params;
   const navigation = useNavigation();
   const [image, setImage] = useState();
   const [imageData, setImageData] = useState();
@@ -43,10 +42,12 @@ const Item = props => {
   const [modalMediaVisible, setModalMediaVisible] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showAlertOk, setShowAlertOk] = useState(false);
+  const [item, setItem] = useState();
 
   const schema = Yup.object().shape({
     title: Yup.string().required('Titulo obrigatório'),
     description: Yup.string().required('Descrição obrigatória'),
+    stock: Yup.string().required('Estoque obrigatório'),
     value: Yup.string().required('Valor obrigatório'),
   });
 
@@ -171,6 +172,14 @@ const Item = props => {
     [handleImage],
   );
 
+  useEffect(() => {
+    setLoading(true);
+    if (props && props.route && props.route.params && props.route.params.item) {
+      setItem(props.route.params.item);
+    }
+    setLoading(false);
+  }, [props]);
+
   return (
     <Container>
       <Header
@@ -245,9 +254,19 @@ const Item = props => {
                       onChangeText={handleChange('description')}
                       onBlur={handleBlur('description')}
                       value={values.description}
-                      returnKeyType="send"
                       onSubmitEditing={handleSubmit}
                       error={errors.description}
+                    />
+                    <Input
+                      name="stock"
+                      icon="docs"
+                      placeholder={'Digite o estoque'}
+                      keyboardType="numeric"
+                      onChangeText={handleChange('stock')}
+                      onBlur={handleBlur('stock')}
+                      value={`${values.stock}`}
+                      onSubmitEditing={handleSubmit}
+                      error={errors.stock}
                     />
                     <InputCurrency
                       value={values.value}
@@ -256,17 +275,7 @@ const Item = props => {
                       delimiter=","
                       separator="."
                       precision={2}
-                      // onChangeText={(formattedValue) => {
-                      //   console.log(formattedValue); // $2,310.46
-                      // }}
-                    />
-                    <InputCurrency
-                      value={values.value}
-                      onChangeValue={val => setFieldValue('value', val)}
-                      unit="Quantidade"
-                      delimiter=","
-                      separator="."
-                      precision={2}
+                      returnKeyType="send"
                       // onChangeText={(formattedValue) => {
                       //   console.log(formattedValue); // $2,310.46
                       // }}

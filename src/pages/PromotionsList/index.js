@@ -19,8 +19,7 @@ const Promotions = props => {
   const {goBack, navigate} = props.navigation;
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const [data, setData] = useState(data);
-  const [search, setSearch] = useState(data);
+  const [data, setData] = useState([]);
 
   const getItems = useCallback(async txt => {
     try {

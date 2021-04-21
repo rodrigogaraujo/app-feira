@@ -52,15 +52,24 @@ const Item = ({item}) => {
         <ViewItemBottom>
           <Icon name="speech" size={25} color={colors.black} />
         </ViewItemBottom>
+        <ViewItemBottom style={{paddingLeft: 16}}>
+          <Icon name="heart" size={25} color={colors.red} />
+        </ViewItemBottom>
         <ViewTwoItemBottom>
           {value > 0 ? (
             <ViewItemBottom onPress={() => setValue(stt => stt - 1)}>
               <Icon name="minus" size={25} color={colors.red} />
             </ViewItemBottom>
           ) : null}
-          <ViewItemBottom onPress={() => setValue(stt => stt + 1)}>
-            <Icon name="plus" size={25} color={colors.primary_correct} />
-          </ViewItemBottom>
+          {item.stock > value ? (
+            <ViewItemBottom
+              onPress={() =>
+                item.stock > value ? setValue(stt => stt + 1) : null
+              }>
+              <Icon name="plus" size={25} color={colors.primary_correct} />
+            </ViewItemBottom>
+          ) : null}
+
           <Value>{value}</Value>
         </ViewTwoItemBottom>
       </ViewBottom>

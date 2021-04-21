@@ -43,14 +43,18 @@ const Marketer = () => {
         <Loading />
       ) : (
         <>
-          <Title>Convênios para você</Title>
-          <FlatListStyled
-            data={agreements && agreements.length ? agreements : []}
-            horizontal={true}
-            renderItem={({item}) => <Item item={item} />}
-            keyExtractor={item => item.id}
-            showsHorizontalScrollIndicator={false}
-          />
+          {agreements && agreements.length ? (
+            <>
+              <Title>Convênios para você</Title>
+              <FlatListStyled
+                data={agreements && agreements.length ? agreements : []}
+                horizontal={true}
+                renderItem={({item}) => <Item item={item} />}
+                keyExtractor={item => item.id}
+                showsHorizontalScrollIndicator={false}
+              />
+            </>
+          ) : null}
           <Content>
             <Option>
               <Icon
